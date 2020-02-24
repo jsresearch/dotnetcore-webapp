@@ -1,0 +1,24 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Salus Scan 
+      id: salus_scan
+      uses: federacy/scan-action@0.1.1  
+      with:
+        report_uri: "https://www.securedevelopment.com/collector/salus_scans/71757b98-4b14-4ca7-89d7-3150074612bf"
+      env:
+        SALUS_CONFIGURATION: "file://../salus-configuration.yaml file://config/pattern_search.yaml"

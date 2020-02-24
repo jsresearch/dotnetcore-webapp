@@ -1,0 +1,8 @@
+scanner_configs:
+  PatternSearch:
+    matches:
+      - regex: PRIVATE
+        message: Do not commit private keys.
+        forbidden: true
+        exclude_directory:
+          - config
